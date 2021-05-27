@@ -52,7 +52,7 @@ jobs:
       - run:
           name: "Create database and run migration"
           command: |
-            CREATE DATABASE laravel1db
+            php artisan db pgsql
             php artisan migrate 
 
       - run:
