@@ -62,11 +62,9 @@ jobs:
 
       - run:
           name: "Create database and run migration"
-          command:
-            command: 
-              
+          command: ./vendor/bin/phpunit tests/Unit 
           environment:
-            DATABASE_URL: "127.0.0.1:8000"
+          DATABASE_URL: 127.0.0.1:8000
 
 
 
