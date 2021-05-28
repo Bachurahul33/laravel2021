@@ -62,10 +62,9 @@ jobs:
 
       - run:
           name: "Create database and run migration"
-          command: 
-          environment:
-          DATABASE_URL: 127.0.0.1:8000
-
+          command: |
+            touch database/database.sqlite
+            php artisan migrate --env=testing
 
 
       - run:
