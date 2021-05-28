@@ -60,11 +60,11 @@ jobs:
           name: "Run Unit Tests"
           command: ./vendor/bin/phpunit tests/Unit
 
-      - run:
-          name: "Create database and run migration"
-          command:
-            create table "migrations"
-            php artisan migrate:install 
+    #  - run:
+     #     name: "Create database and run migration"
+      #    command:
+       #     create table "migrations"
+        #    php artisan migrate:install 
 
       - run:
           name: "Run Http Tests"
