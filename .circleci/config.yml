@@ -80,14 +80,14 @@ jobs:
       - run:
           name: Start Chrome Driver
           command: ./vendor/laravel/dusk/bin/chromedriver-linux
-          background: true
+         # background: true
 
       - run:
           name: Run Laravel Server
           command: php artisan serve
-          background: true
+          
 
       - run:
           name: Run Browser Tests Tests
           command: php artisan dusk
-          background: true
+          
