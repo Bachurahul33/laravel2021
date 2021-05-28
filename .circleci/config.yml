@@ -8,6 +8,17 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.4-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: postgres:10.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: 
+          POSTGRES_DB: laravel1db
 
     steps:
       - checkout
@@ -52,8 +63,8 @@ jobs:
       - run:
           name: "Create database and run migration"
           command: |
-            psql -U laravel1db
-            php artisan migrate 
+            CREATE DATABASE laravel1db
+            php artisan migrate --env=testing
 
       - run:
           name: "Run Http Tests"
