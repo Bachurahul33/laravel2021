@@ -85,7 +85,7 @@ jobs:
       - run:
           name: Run Laravel Server
           command: php artisan serve
-          
+          background: true
 
       - run:
           name: Run Browser Tests Tests
