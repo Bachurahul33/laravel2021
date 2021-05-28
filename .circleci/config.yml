@@ -66,9 +66,9 @@ jobs:
        #     create table "migrations"
         #    php artisan migrate:install 
 
-   #   - run:
-    #      name: "Run Http Tests"
-     #     command: ./vendor/bin/phpunit tests/Feature
+      - run:
+          name: "Run Http Tests"
+          command: ./vendor/bin/phpunit tests/Feature
 
       - run:
           name: "Install Dusk and Update Chrome Drivers"
