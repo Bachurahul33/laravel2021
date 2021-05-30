@@ -19,8 +19,8 @@ abstract class DuskTestCase extends BaseTestCase
      */
     public static function prepare()
     {
-        if (! static::runningInSail()) {
-            static::startChromeDriver();
+      //  if (! static::runningInSail()) {
+        //    static::startChromeDriver();
         }
     }
 
@@ -36,7 +36,7 @@ abstract class DuskTestCase extends BaseTestCase
         ])->unless($this->hasHeadlessDisabled(), function ($items) {
             return $items->merge([
                 '--disable-gpu',
-                '--headless',
+                '--headless', 
             ]);
         })->all());
 

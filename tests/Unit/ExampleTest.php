@@ -15,4 +15,12 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+    public function test_login(){
+        $user=new user([
+        'name'="Admin",
+        'email'="bachurahul@gmail.com",
+        'password'=bcrypt("123456789")
+            ]);
+        $this->assertEquals('Admin', $user->name);
+                            
 }

@@ -8,7 +8,19 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.4-node-browsers
-
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD 
+      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      - image: circleci/postgres:9.6-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: laravel1db
+          POSTGRES_PASSWORD: 
+          
     steps:
       - checkout
 
@@ -18,10 +30,10 @@ jobs:
             sudo apt update
             sudo docker-php-ext-install zip
 
-      - run:
-          name: "Create Environment file"
-          command: |
-            mv .env.testing .env
+     # - run:
+     #     name: "Create Environment file"
+     #     command: |
+      #       .env
 
       # Download and cache dependencies
       - restore_cache:
@@ -45,26 +57,28 @@ jobs:
           command: php artisan key:generate
 
       # run tests with phpunit
-      - run:
-          name: "Run Unit Tests"
-          command: ./vendor/bin/phpunit tests/Unit
+    #  - run:
+     #     name: "Run Unit Tests"
+      #    command: ./vendor/bin/phpunit tests/Unit
 
-      - run:
-          name: "Create database and run migration"
-          command: |
-            touch database/database.sqlite
-            php artisan migrate --env=testing
+    #  - run:
+     #     name: "Create database and run migration"
+      #    command: |
+       #     touch database/database.sqlite
+        #    php artisan migrate --env=testing
 
-      - run:
-          name: "Run Http Tests"
-          command: ./vendor/bin/phpunit tests/Feature
+
+     # - run:
+      #    name: "Run Http Tests"
+       #   command: ./vendor/bin/phpunit tests/Feature
+        #  background: true
 
       - run:
           name: "Install Dusk and Update Chrome Drivers"
           command: |
-            composer require --dev laravel/dusk:"^4.0"
+            composer require --dev laravel/dusk
             composer require --dev staudenmeir/dusk-updater
-            php artisan dusk:update --detect
+            
 
       - run:
           name: Start Chrome Driver
@@ -75,7 +89,9 @@ jobs:
           name: Run Laravel Server
           command: php artisan serve
           background: true
+          
 
       - run:
           name: Run Browser Tests Tests
           command: php artisan dusk
+          background: true
