@@ -19,6 +19,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  
         environment:
           POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
           POSTGRES_DB: laravel1db
           
     
@@ -31,10 +32,7 @@ jobs:
             sudo apt update
             sudo docker-php-ext-install zip
 
-     # - run:
-     #     name: "Create Environment file"
-     #     command: |
-      #       .env
+  
 
       # Download and cache dependencies
       - restore_cache:
@@ -57,22 +55,13 @@ jobs:
           name: "Generate App key"
           command: php artisan key:generate
 
-      - run:
-          name: Install PHPUnit
-          command: |
-            sudo wget -O /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-6.5.phar
-            sudo chmod +x /usr/local/bin/phpunit
-
-       #run tests with phpunit
-      - run:
-          name: "Run Unit Tests"
-          command: ./vendor/bin/phpunit tests/Unit
+    
 
       - run:
           name: "Create database and run migration"
           command: |
             sudo apt install -y postgresql-client 
-            createdb -h 127.0.0.1 laravel1db -O postgres
+            createdb -h 127.0.0.1:8000 laravel1db -O postgres
             php artisan migrate
           
 
