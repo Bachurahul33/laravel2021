@@ -19,7 +19,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_PASSWORD: password 
           POSTGRES_DB: laravel1db
           
     
@@ -67,7 +67,7 @@ jobs:
           name: "Create database and run migration"
           command: |
             sudo apt install -y postgresql-client 
-            createdb -h 127.0.0.1 laravel20211 
+            createdb -h 127.0.0.1 laravel20211 -u postgres -ppassword
             php artisan migrate
           
 
