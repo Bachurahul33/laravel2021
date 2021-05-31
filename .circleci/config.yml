@@ -61,7 +61,7 @@ jobs:
           name: "Create database and run migration"
           command: |
             sudo apt install -y postgresql-client 
-            createdb -h 127.0.0.1:8000 laravel1db -O postgres
+            createdb -h 127.0.0.1 laravel1db -O postgres
             php artisan migrate
           
 
