@@ -26,6 +26,11 @@ jobs:
     
     steps:
       - checkout
+      - run:
+          name: Install MySQL driver
+          command: |
+            sudo docker-php-ext-configure pdo_pgsql --with-pdo-pgsql=pgsqlnd
+            sudo docker-php-ext-install pdo pdo_pgsql
 
       - run:
           name: "Prepare Environment"
