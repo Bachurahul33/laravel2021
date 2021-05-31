@@ -19,7 +19,6 @@ jobs:
           password: $DOCKERHUB_PASSWORD  
         environment:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password 
           POSTGRES_DB: laravel1db
           
     
