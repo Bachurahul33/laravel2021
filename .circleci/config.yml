@@ -70,6 +70,7 @@ jobs:
           command: |
             sudo apt install -y postgresql-client
             createdb -h 127.0.0.1 laravel20211 -0 postgres
+            php artisan migrate
         
 
 
