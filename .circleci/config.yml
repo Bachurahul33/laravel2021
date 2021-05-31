@@ -19,6 +19,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  
         environment:
           POSTGRES_USER: postgres
+          POSTGRES_ROOT_PASSWORD: ''
           POSTGRES_PASSWORD: password
           POSTGRES_DB: laravel1db
           
@@ -49,7 +50,7 @@ jobs:
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
-            - ./vendor
+            - vendor
 
       - run:
           name: "Generate App key"
@@ -60,9 +61,11 @@ jobs:
       - run:
           name: "Create database and run migration"
           command: |
-            sudo apt install -y postgresql-client 
-            createdb -h 127.0.0.1 laravel1db -O postgres
-            php artisan migrate --env=testing
+        
+           #  createdb -h 127.0.0.1 laravel1db -O postgres
+           # php artisan migrate --env=testing
+            touch storage/testing.sqlite
+            php artisan migrate --env=testing --database=pgsql --force
           
 
 
