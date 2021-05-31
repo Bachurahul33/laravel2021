@@ -62,7 +62,7 @@ jobs:
           command: |
             sudo apt install -y postgresql-client 
             createdb -h 127.0.0.1 laravel1db -O postgres
-            php artisan migrate --env
+            php artisan migrate --env=testing
           
 
 
