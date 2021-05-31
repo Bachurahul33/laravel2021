@@ -8,6 +8,7 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.4-node-browsers
+      - image: postgres
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD 
@@ -64,8 +65,7 @@ jobs:
       - run:
           name: "Create database and run migration"
           command: |
-            sudo apt-get install postgresql-client-9.6
-            sudo php artisan migrate
+            yarn db-migrate:laravel20211
         
 
 
