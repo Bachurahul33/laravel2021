@@ -19,9 +19,7 @@ jobs:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: laravel20211
           
-
-          
-           
+    
     steps:
       - checkout
 
@@ -66,8 +64,9 @@ jobs:
           name: "Create database and run migration"
           command: |
             sudo apt install -y postgresql-client 
-            createdb -h 127.0.0.1 laravel20211 -u postgres
-          background: true
+            createdb -h 127.0.0.1 laravel20211 
+            php artisan migrate
+          
 
 
      # - run:
