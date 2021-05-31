@@ -13,11 +13,14 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD 
       # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
-      - image: circleci/postgres:9.6
+      - image: circleci/postgres:9.6-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  
         environment:
           POSTGRES_USER: postgres
           POSTGRES_HOST_AUTH_METHOD: trust
-          POSTGRES_DB: laravel20211
+          POSTGRES_DB: laravel1db
           
     
     steps:
