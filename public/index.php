@@ -56,6 +56,7 @@ $kernel->terminate($request, $response);
 
 ?>
 
+
 <html>
 <body>
 <script type="text/javascript">
